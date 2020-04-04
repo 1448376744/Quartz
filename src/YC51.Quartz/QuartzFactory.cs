@@ -60,12 +60,12 @@ namespace YC51.Quartz
                 ThreadPool.QueueUserWorkItem(async (state) =>
                 {
                     var task = ActivatorUtilities
-                       .GetServiceOrCreateInstance(_provider, builder.TaskType) as IQuartzTask;
+                       .GetServiceOrCreateInstance(scope.ServiceProvider, builder.TaskType) as IQuartzTask;
                     var filters = new List<IQuartzTaskFilter>();
                     foreach (var item in builder.FilterTypes)
                     {
                         var filter = ActivatorUtilities
-                            .GetServiceOrCreateInstance(_provider, item) as IQuartzTaskFilter;
+                            .GetServiceOrCreateInstance(scope.ServiceProvider, item) as IQuartzTaskFilter;
                         filters.Add(filter);
                     }
                     var executor = new QuartzFilterExecutor(filters);

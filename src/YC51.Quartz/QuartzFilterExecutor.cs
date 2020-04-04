@@ -8,12 +8,12 @@ namespace YC51.Quartz
     /// <summary>
     /// 过滤器执行器
     /// </summary>
-    public class QuartzFilterExecutor
+    internal class QuartzFilterExecutor
     {
         /// <summary>
         /// 过滤器
         /// </summary>
-        private Queue<IQuartzTaskFilter> _filters = new Queue<IQuartzTaskFilter>();
+        private readonly Queue<IQuartzTaskFilter> _filters = new Queue<IQuartzTaskFilter>();
 
         /// <summary>
         /// 创建一个过滤器执行器
