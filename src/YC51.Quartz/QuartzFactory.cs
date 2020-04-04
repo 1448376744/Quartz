@@ -54,18 +54,18 @@ namespace YC51.Quartz
         /// <param name="builder"></param>
         private void QueueUserWorkItem(QuartzTaskBuilder builder)
         {
-            using (var scope = _provider.CreateScope())
+            //使用线程池调度
+            ThreadPool.QueueUserWorkItem(async (state) =>
             {
-                //使用线程池调度
-                ThreadPool.QueueUserWorkItem(async (state) =>
+                using (var scope = _provider.CreateScope())
                 {
                     var task = ActivatorUtilities
-                       .GetServiceOrCreateInstance(scope.ServiceProvider, builder.TaskType) as IQuartzTask;
+                           .GetServiceOrCreateInstance(scope.ServiceProvider, builder.TaskType) as IQuartzTask;
                     var filters = new List<IQuartzTaskFilter>();
                     foreach (var item in builder.FilterTypes)
                     {
                         var filter = ActivatorUtilities
-                            .GetServiceOrCreateInstance(scope.ServiceProvider, item) as IQuartzTaskFilter;
+                                .GetServiceOrCreateInstance(scope.ServiceProvider, item) as IQuartzTaskFilter;
                         filters.Add(filter);
                     }
                     var executor = new QuartzFilterExecutor(filters);
@@ -73,8 +73,8 @@ namespace YC51.Quartz
                     {
 
                     }));
-                });
-            }
+                }
+            });
         }
     }
 }
