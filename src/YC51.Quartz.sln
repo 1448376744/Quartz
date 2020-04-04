@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29911.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleTesting", "ConsoleTesting\ConsoleTesting.csproj", "{552B9084-639F-4387-99DB-2DE8909A0D4E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YC51.Quartz", "YC51.Quartz\YC51.Quartz.csproj", "{1D488AED-AF7B-4852-A13A-A019D116D628}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{552B9084-639F-4387-99DB-2DE8909A0D4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{552B9084-639F-4387-99DB-2DE8909A0D4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{552B9084-639F-4387-99DB-2DE8909A0D4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{552B9084-639F-4387-99DB-2DE8909A0D4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D488AED-AF7B-4852-A13A-A019D116D628}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D488AED-AF7B-4852-A13A-A019D116D628}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D488AED-AF7B-4852-A13A-A019D116D628}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D488AED-AF7B-4852-A13A-A019D116D628}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5E51B099-DC27-43BA-9D8D-B5233919166D}
+	EndGlobalSection
+EndGlobal
