@@ -28,12 +28,21 @@ namespace YC51.Quartz
             _completionSource = new TaskCompletionSource<int>();
         }
 
-        public async Task StartAsync()
+        public void Dispose()
+        {
+            _timer?.Dispose();
+        }
+
+        public async Task StartAsync(CancellationToken cancellationToken = default)
         {
             var time0 = new DateTime(1970);
             _timer = new System.Timers.Timer(1000);
             _timer.Elapsed += (object sender, ElapsedEventArgs e) =>
             {
+                if (cancellationToken.IsCancellationRequested)
+                {
+                    Stop();
+                }
                 //此刻
                 var time1 = _builder.PerExecuteUtcTime();
                 //迭代所有任务

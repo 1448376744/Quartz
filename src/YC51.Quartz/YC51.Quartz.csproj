@@ -5,13 +5,13 @@
     <NoWarn>$(NoWarn);1591</NoWarn>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <Description>轻量级基于Cron表达式的任务调度,支持依赖注入以及过滤器</Description>
-    <Version>1.0.4</Version>
+    <Version>1.0.5</Version>
     <Copyright>YC51</Copyright>
     <PackageTags>quartz,timer</PackageTags>
     <RepositoryUrl>https://github.com/1448376744/Quartz</RepositoryUrl>
     <PackageProjectUrl>https://github.com/1448376744/Quartz</PackageProjectUrl>
-    <AssemblyVersion>1.0.4.0</AssemblyVersion>
-    <FileVersion>1.0.4.0</FileVersion>
+    <AssemblyVersion>1.0.5.0</AssemblyVersion>
+    <FileVersion>1.0.5.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

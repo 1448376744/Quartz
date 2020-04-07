@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace YC51.Quartz
 {
-    public interface IQuartzFactory
+    public interface IQuartzFactory : IDisposable
     {
-        Task StartAsync();
+        Task StartAsync(CancellationToken cancellationToken = default);
         void Stop();
     }
 }

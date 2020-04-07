@@ -32,9 +32,9 @@ namespace ConsoleTesting
             var factory = provider.GetRequiredService<IQuartzFactory>();
             //启动任务调度
             var cancel = new CancellationTokenSource();
-            await factory.StartAsync();
+            factory.StartAsync(cancel.Token);
             Thread.Sleep(5000);
-            factory.Stop();
+            cancel.Cancel();
         }
     }
 }
