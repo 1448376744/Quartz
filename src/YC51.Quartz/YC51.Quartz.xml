@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>YC51.Quartz</name>
+    </assembly>
+    <members>
+        <member name="T:YC51.Quartz.IQuartzTask">
+            <summary>
+            任务
+            </summary>
+        </member>
+        <member name="T:YC51.Quartz.IQuartzTaskFilter">
+            <summary>
+            过滤器
+            </summary>
+        </member>
+        <member name="M:YC51.Quartz.IQuartzTaskFilter.OnExecuteAsync(YC51.Quartz.TaskExecutingContext,YC51.Quartz.QuartzTaskExecuteDelegate)">
+            <summary>
+            任务执行过滤
+            </summary>
+            <param name="context">任务执行上下文</param>
+            <param name="next">任务委托</param>
+            <returns></returns>
+        </member>
+        <member name="T:YC51.Quartz.QuartzTaskExecuteDelegate">
+            <summary>
+            任务执行委托
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:YC51.Quartz.QuartzFactory">
+            <summary>
+            任务调度工厂
+            </summary>
+        </member>
+        <member name="M:YC51.Quartz.QuartzFactory.QueueUserWorkItem(YC51.Quartz.QuartzTaskBuilder)">
+            <summary>
+            使用线程池排队执行任务
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="T:YC51.Quartz.QuartzFactoryBuilder">
+            <summary>
+            任务工厂构建
+            </summary>
+        </member>
+        <member name="P:YC51.Quartz.QuartzFactoryBuilder.PerExecuteUtcTime">
+            <summary>
+            设置每次,默认为:DateTime.UtcNow.AddHours(8)
+            </summary>
+        </member>
+        <member name="M:YC51.Quartz.QuartzFactoryBuilder.AddTask``1(System.String)">
+            <summary>
+            添加一个任务
+            </summary>
+            <typeparam name="TTask">任务类型</typeparam>
+            <param name="expression">cron表达式，只支持6个域</param>
+        </member>
+        <member name="M:YC51.Quartz.QuartzFactoryBuilder.AddTask``1(System.String,System.Type[])">
+            <summary>
+            添加一个任务和过滤器
+            </summary>
+            <typeparam name="TTask">任务类型</typeparam>
+            <param name="expression">cron表达式，只支持6个域</param>
+            <param name="filterTypes">过滤器组</param>
+        </member>
+        <member name="T:YC51.Quartz.QuartzFilterExecutor">
+            <summary>
+            过滤器执行器
+            </summary>
+        </member>
+        <member name="F:YC51.Quartz.QuartzFilterExecutor._filters">
+            <summary>
+            过滤器
+            </summary>
+        </member>
+        <member name="M:YC51.Quartz.QuartzFilterExecutor.#ctor(System.Collections.Generic.List{YC51.Quartz.IQuartzTaskFilter})">
+            <summary>
+            创建一个过滤器执行器
+            </summary>
+            <param name="filters"></param>
+        </member>
+        <member name="M:YC51.Quartz.QuartzFilterExecutor.Execute(System.Func{System.Threading.Tasks.Task})">
+            <summary>
+            执行过滤器栈
+            </summary>
+            <param name="next">任务执行器</param>
+            <returns></returns>
+        </member>
+        <member name="M:YC51.Quartz.QuartzFilterExecutor.Builder(System.Func{System.Threading.Tasks.Task})">
+            <summary>
+            构建执行器栈
+            </summary>
+            <param name="next">任务执行器</param>
+            <returns></returns>
+        </member>
+        <member name="T:YC51.Quartz.QuartzTaskBuilder">
+            <summary>
+            任务构建
+            </summary>
+        </member>
+        <member name="M:YC51.Quartz.QuartzTaskBuilder.#ctor(System.Type,Cronos.CronExpression)">
+            <summary>
+            构建任务
+            </summary>
+            <param name="taskType">任务类型</param>
+            <param name="expression">cron表达式</param>
+        </member>
+        <member name="M:YC51.Quartz.QuartzTaskBuilder.#ctor(System.Type,Cronos.CronExpression,System.Type[])">
+            <summary>
+            构建任务
+            </summary>
+            <param name="taskType">任务类型</param>
+            <param name="expression">cron表达式</param>
+            <param name="filterTypes">过滤器组</param>
+        </member>
+        <member name="P:YC51.Quartz.QuartzTaskBuilder.Expression">
+            <summary>
+            Cron表达式
+            </summary>
+        </member>
+        <member name="P:YC51.Quartz.QuartzTaskBuilder.TaskType">
+            <summary>
+            任务类型
+            </summary>
+        </member>
+        <member name="P:YC51.Quartz.QuartzTaskBuilder.FilterTypes">
+            <summary>
+            任务类型
+            </summary>
+        </member>
+        <member name="T:YC51.Quartz.ServiceCollectionExtensions">
+            <summary>
+            扩展依赖注入
+            </summary>
+        </member>
+        <member name="T:YC51.Quartz.TaskExecutingContext">
+            <summary>
+            任务执行上下文
+            </summary>
+        </member>
+    </members>
+</doc>

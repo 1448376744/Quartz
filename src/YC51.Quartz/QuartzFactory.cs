@@ -4,48 +4,61 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Timers;
 
 namespace YC51.Quartz
 {
     /// <summary>
     /// 任务调度工厂
     /// </summary>
-    public class QuartzFactory
+    public class QuartzFactory : IQuartzFactory
     {
         internal IServiceProvider _provider;
 
         internal QuartzFactoryBuilder _builder;
 
+        private System.Timers.Timer _timer;
+
+        private TaskCompletionSource<int> _completionSource;
+
         internal QuartzFactory(IServiceProvider provider, QuartzFactoryBuilder builder)
         {
             _builder = builder;
             _provider = provider;
+            _completionSource = new TaskCompletionSource<int>();
         }
 
         public async Task StartAsync()
         {
             var time0 = new DateTime(1970);
-            await Task.Run(() =>
+            _timer = new System.Timers.Timer(1000);
+            _timer.Elapsed += (object sender, ElapsedEventArgs e) =>
             {
-                while (true)
+                //此刻
+                var time1 = _builder.PerExecuteUtcTime();
+                //迭代所有任务
+                foreach (var item in _builder.Tasks)
                 {
-                    //此刻
-                    var time1 = _builder.PerExecuteUtcTime();
-                    //迭代所有任务
-                    foreach (var item in _builder.Tasks)
+                    //计算当前的任务下次执行时间
+                    var time2 = item.Expression.GetNextOccurrence(time1, true).Value;
+                    //只计算秒数部分
+                    var timestamp1 = unchecked((long)(time1 - time0).TotalSeconds);
+                    var timestamp2 = unchecked((long)(time2 - time0).TotalSeconds);
+                    if (timestamp1 == timestamp2)
                     {
-                        //计算当前的任务下次执行时间
-                        var time2 = item.Expression.GetNextOccurrence(time1, true).Value;
-                        //只计算秒数部分
-                        var timestamp1 = (time1 - time0).TotalSeconds;
-                        var timestamp2 = (time2 - time0).TotalSeconds;
-                        if (timestamp1 == timestamp2)
-                        {
-                            QueueUserWorkItem(item);
-                        }
+                        QueueUserWorkItem(item);
                     }
                 }
-            });
+            };
+            _timer.Enabled = true;
+            _timer.Start();
+            await _completionSource.Task;
+        }
+
+        public void Stop()
+        {
+            _completionSource.SetResult(0);
+            _timer.Stop();
         }
 
         /// <summary>

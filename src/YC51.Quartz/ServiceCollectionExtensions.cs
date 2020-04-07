@@ -12,7 +12,7 @@ namespace YC51.Quartz
     {
         public static IServiceCollection AddQuartzFactory(this IServiceCollection services, Action<QuartzFactoryBuilder> builder)
         {
-            services.AddSingleton(s =>
+            services.AddSingleton<IQuartzFactory>(s =>
             {
                 var qfb = new QuartzFactoryBuilder();
                 qfb.PerExecuteUtcTime = () => DateTime.UtcNow.AddHours(8);
